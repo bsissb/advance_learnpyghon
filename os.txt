@@ -1,0 +1,985 @@
+Help on module os:
+
+NAME
+    os - OS routines for NT or Posix depending on what system we're on.
+
+FILE
+    c:\users\hp\2.7.11\lib\os.py
+
+DESCRIPTION
+    This exports:
+      - all functions from posix, nt, os2, or ce, e.g. unlink, stat, etc.
+      - os.path is one of the modules posixpath, or ntpath
+      - os.name is 'posix', 'nt', 'os2', 'ce' or 'riscos'
+      - os.curdir is a string representing the current directory ('.' or ':')
+      - os.pardir is a string representing the parent directory ('..' or '::')
+      - os.sep is the (or a most common) pathname separator ('/' or ':' or '\\')
+      - os.extsep is the extension separator ('.' or '/')
+      - os.altsep is the alternate pathname separator (None or '/')
+      - os.pathsep is the component separator used in $PATH etc
+      - os.linesep is the line separator in text files ('\r' or '\n' or '\r\n')
+      - os.defpath is the default search path for executables
+      - os.devnull is the file path of the null device ('/dev/null', etc.)
+    
+    Programs that import and use 'os' stand a better chance of being
+    portable between different platforms.  Of course, they must then
+    only use functions that are defined by all platforms (e.g., unlink
+    and opendir), and leave all pathname manipulation to os.path
+    (e.g., split and join).
+
+CLASSES
+    __builtin__.object
+        nt.stat_result
+        nt.statvfs_result
+    exceptions.EnvironmentError(exceptions.StandardError)
+        exceptions.OSError
+    
+    error = class OSError(EnvironmentError)
+     |  OS system call failed.
+     |  
+     |  Method resolution order:
+     |      OSError
+     |      EnvironmentError
+     |      StandardError
+     |      Exception
+     |      BaseException
+     |      __builtin__.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(...)
+     |      x.__init__(...) initializes x; see help(type(x)) for signature
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  __new__ = <built-in method __new__ of type object>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from EnvironmentError:
+     |  
+     |  __reduce__(...)
+     |  
+     |  __str__(...)
+     |      x.__str__() <==> str(x)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from EnvironmentError:
+     |  
+     |  errno
+     |      exception errno
+     |  
+     |  filename
+     |      exception filename
+     |  
+     |  strerror
+     |      exception strerror
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseException:
+     |  
+     |  __delattr__(...)
+     |      x.__delattr__('name') <==> del x.name
+     |  
+     |  __getattribute__(...)
+     |      x.__getattribute__('name') <==> x.name
+     |  
+     |  __getitem__(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  __getslice__(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  __repr__(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  __setattr__(...)
+     |      x.__setattr__('name', value) <==> x.name = value
+     |  
+     |  __setstate__(...)
+     |  
+     |  __unicode__(...)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from BaseException:
+     |  
+     |  __dict__
+     |  
+     |  args
+     |  
+     |  message
+    
+    class stat_result(__builtin__.object)
+     |  stat_result: Result from stat or lstat.
+     |  
+     |  This object may be accessed either as a tuple of
+     |    (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime)
+     |  or via the attributes st_mode, st_ino, st_dev, st_nlink, st_uid, and so on.
+     |  
+     |  Posix/windows: If your platform supports st_blksize, st_blocks, st_rdev,
+     |  or st_flags, they are available as attributes only.
+     |  
+     |  See os.stat for more information.
+     |  
+     |  Methods defined here:
+     |  
+     |  __add__(...)
+     |      x.__add__(y) <==> x+y
+     |  
+     |  __contains__(...)
+     |      x.__contains__(y) <==> y in x
+     |  
+     |  __eq__(...)
+     |      x.__eq__(y) <==> x==y
+     |  
+     |  __ge__(...)
+     |      x.__ge__(y) <==> x>=y
+     |  
+     |  __getitem__(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  __getslice__(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  __gt__(...)
+     |      x.__gt__(y) <==> x>y
+     |  
+     |  __hash__(...)
+     |      x.__hash__() <==> hash(x)
+     |  
+     |  __le__(...)
+     |      x.__le__(y) <==> x<=y
+     |  
+     |  __len__(...)
+     |      x.__len__() <==> len(x)
+     |  
+     |  __lt__(...)
+     |      x.__lt__(y) <==> x<y
+     |  
+     |  __mul__(...)
+     |      x.__mul__(n) <==> x*n
+     |  
+     |  __ne__(...)
+     |      x.__ne__(y) <==> x!=y
+     |  
+     |  __reduce__(...)
+     |  
+     |  __repr__(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  __rmul__(...)
+     |      x.__rmul__(n) <==> n*x
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  st_atime
+     |      time of last access
+     |  
+     |  st_ctime
+     |      time of last change
+     |  
+     |  st_dev
+     |      device
+     |  
+     |  st_gid
+     |      group ID of owner
+     |  
+     |  st_ino
+     |      inode
+     |  
+     |  st_mode
+     |      protection bits
+     |  
+     |  st_mtime
+     |      time of last modification
+     |  
+     |  st_nlink
+     |      number of hard links
+     |  
+     |  st_size
+     |      total size, in bytes
+     |  
+     |  st_uid
+     |      user ID of owner
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  __new__ = <built-in method __new__ of type object>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  n_fields = 13
+     |  
+     |  n_sequence_fields = 10
+     |  
+     |  n_unnamed_fields = 3
+    
+    class statvfs_result(__builtin__.object)
+     |  statvfs_result: Result from statvfs or fstatvfs.
+     |  
+     |  This object may be accessed either as a tuple of
+     |    (bsize, frsize, blocks, bfree, bavail, files, ffree, favail, flag, namemax),
+     |  or via the attributes f_bsize, f_frsize, f_blocks, f_bfree, and so on.
+     |  
+     |  See os.statvfs for more information.
+     |  
+     |  Methods defined here:
+     |  
+     |  __add__(...)
+     |      x.__add__(y) <==> x+y
+     |  
+     |  __contains__(...)
+     |      x.__contains__(y) <==> y in x
+     |  
+     |  __eq__(...)
+     |      x.__eq__(y) <==> x==y
+     |  
+     |  __ge__(...)
+     |      x.__ge__(y) <==> x>=y
+     |  
+     |  __getitem__(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  __getslice__(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  __gt__(...)
+     |      x.__gt__(y) <==> x>y
+     |  
+     |  __hash__(...)
+     |      x.__hash__() <==> hash(x)
+     |  
+     |  __le__(...)
+     |      x.__le__(y) <==> x<=y
+     |  
+     |  __len__(...)
+     |      x.__len__() <==> len(x)
+     |  
+     |  __lt__(...)
+     |      x.__lt__(y) <==> x<y
+     |  
+     |  __mul__(...)
+     |      x.__mul__(n) <==> x*n
+     |  
+     |  __ne__(...)
+     |      x.__ne__(y) <==> x!=y
+     |  
+     |  __reduce__(...)
+     |  
+     |  __repr__(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  __rmul__(...)
+     |      x.__rmul__(n) <==> n*x
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  f_bavail
+     |  
+     |  f_bfree
+     |  
+     |  f_blocks
+     |  
+     |  f_bsize
+     |  
+     |  f_favail
+     |  
+     |  f_ffree
+     |  
+     |  f_files
+     |  
+     |  f_flag
+     |  
+     |  f_frsize
+     |  
+     |  f_namemax
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  __new__ = <built-in method __new__ of type object>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  n_fields = 10
+     |  
+     |  n_sequence_fields = 10
+     |  
+     |  n_unnamed_fields = 0
+
+FUNCTIONS
+    abort(...) #中止
+        abort() -> does not return!
+        
+        Abort the interpreter immediately.  This 'dumps core' or otherwise fails
+        in the hardest way possible on the hosting operating system.
+    立刻中止解释器
+	
+    access(...) #访问
+        access(path, mode) -> True if granted, False otherwise
+        访问（路径，模式） - >如果授予，则为True，否则为False
+        Use the real uid/gid to test for access to a path.  Note that most
+        operations will use the effective uid/gid, therefore this routine can
+        be used in a suid/sgid environment to test if the invoking user has the
+        specified access to the path.  The mode argument can be F_OK to test
+        existence, or the inclusive-OR of R_OK, W_OK, and X_OK.
+		使用真正的uid / gid测试对路径的访问。注意大多数
+        操作将使用有效的uid / gid，因此这个例程可以
+        在suid / sgid环境中使用以测试调用的用户是否具有
+        指定对路径的访问
+		
+    chdir(...)
+        chdir(path)
+        
+        Change the current working directory to the specified path.
+		将当前工作目录更改为指定的路径。
+		
+    chmod(...)
+        chmod(path, mode)
+        
+        Change the access permissions of a file.
+		更改文件的访问权限。
+		
+=======================================================================================================
+    close(...)
+        close(fd)
+        
+        Close a file descriptor (for low level IO).
+		关闭文件描述符（用于低级IO）。
+		
+    closerange(...)
+        closerange(fd_low, fd_high)
+        
+        Closes all file descriptors in [fd_low, fd_high), ignoring errors.
+		关闭[fd_low，fd_high）中的所有文件描述符，忽略错误。
+		
+    dup(...)
+        dup(fd) -> fd2
+        
+        Return a duplicate of a file descriptor.
+		返回文件描述符的副本
+		
+    dup2(...)
+        dup2(old_fd, new_fd)
+        
+        Duplicate file descriptor.
+		重复文件描述符
+		
+    execl(file, *args)
+        execl(file, *args)
+        
+        Execute the executable file with argument list args, replacing the
+        current process.
+		使用参数列表args执行可执行文件，替换当前过程。
+		
+    execle(file, *args)
+        execle(file, *args, env)
+        
+        Execute the executable file with argument list args and
+        environment env, replacing the current process.
+		使用参数列表args和执行可执行文件环境env，替换当前进程。
+		
+    execlp(file, *args)
+        execlp(file, *args)
+        
+        Execute the executable file (which is searched for along $PATH)
+        with argument list args, replacing the current process.
+		执行可执行文件（沿$ PATH搜索）与参数列表args，替换当前进程。
+		
+    execlpe(file, *args)
+        execlpe(file, *args, env)
+        
+        Execute the executable file (which is searched for along $PATH)
+        with argument list args and environment env, replacing the current
+        process.
+		执行可执行文件（沿$ PATH搜索）使用参数列表args和环境env，替换当前处理。
+		
+    execv(...)
+        execv(path, args)
+        
+        Execute an executable path with arguments, replacing current process.
+        
+            path: path of executable file
+            args: tuple or list of strings
+		使用参数执行可执行路径，替换当前进程。
+        
+			path：可执行文件的路径
+			args：元组或字符串列表
+			
+    execve(...)
+        execve(path, args, env)
+        
+        Execute a path with arguments and environment, replacing current process.
+        
+            path: path of executable file
+            args: tuple or list of arguments
+            env: dictionary of strings mapping to strings
+		使用参数和环境执行路径，替换当前进程。
+        
+            path：可执行文件的路径
+            args：元组或参数列表
+            env：字符串映射到字符串的字典
+			
+    execvp(file, args)
+        execvp(file, args)
+        
+        Execute the executable file (which is searched for along $PATH)
+        with argument list args, replacing the current process.
+        args may be a list or tuple of strings.
+		执行可执行文件（沿$ PATH搜索）与参数列表args，
+		替换当前进程。args可以是字符串的列表或元组。
+		
+    execvpe(file, args, env)
+        execvpe(file, args, env)
+        
+        Execute the executable file (which is searched for along $PATH)
+        with argument list args and environment env , replacing the
+        current process.
+        args may be a list or tuple of strings.
+		执行可执行文件（沿$ PATH搜索）使用参数列表args和环境env，
+		替换当前过程。args可以是字符串的列表或元组。
+		
+    fdopen(...)
+        fdopen(fd [, mode='r' [, bufsize]]) -> file_object
+        
+        Return an open file object connected to a file descriptor.
+		返回连接到文件描述符的打开文件对象。
+		
+    fstat(...)
+        fstat(fd) -> stat result
+        
+        Like stat(), but for an open file descriptor.
+		就像stat（），但是对于一个打开的文件描述符。
+		
+    fsync(...)
+        fsync(fildes)
+        
+        force write of file with filedescriptor to disk.
+		强制写文件与filedescriptor到磁盘。
+		
+============================================================================================	
+    getcwd(...)
+        getcwd() -> path
+        
+        Return a string representing the current working directory.
+		返回一个表示当前工作目录的字符串。
+		
+    getcwdu(...)
+        getcwdu() -> path
+        
+        Return a unicode string representing the current working directory.
+        返回表示当前工作目录的unicode字符串。
+		
+    getenv(key, default=None)
+        Get an environment variable, return None if it doesn't exist.
+        The optional second argument can specify an alternate default.
+		获取环境变量，如果不存在则返回None。
+        可选的第二个参数可以指定备用默认值。
+		
+    getpid(...)
+        getpid() -> pid
+        
+        Return the current process id
+		返回当前进程标识
+		
+    isatty(...)
+        isatty(fd) -> bool
+        
+        Return True if the file descriptor 'fd' is an open file descriptor
+        connected to the slave end of a terminal.
+		如果文件描述符“fd”是打开的文件描述符，则返回True
+        连接到终端的从端。
+		
+    kill(...)
+        kill(pid, sig)
+        
+        Kill a process with a signal.
+		用信号杀死进程
+		
+    listdir(...)
+        listdir(path) -> list_of_strings
+        
+        Return a list containing the names of the entries in the directory.
+        
+            path: path of directory to list
+        
+        The list is in arbitrary order.  It does not include the special
+        entries '.' and '..' even if they are present in the directory.
+    返回目录中包含的条目的名称的列表。
+        
+            path：要列出的目录的路径
+        
+        列表是任意顺序。它不包括特殊条目'.'和'..'，即使它们存在于目录中。
+		
+    lseek(...)
+        lseek(fd, pos, how) -> newpos
+        
+        Set the current position of a file descriptor.
+        Return the new cursor position in bytes, starting from the beginning.
+		设置文件描述符的当前位置。
+        以字节为单位返回从开始处开始的新光标位置。
+		
+    lstat(...)
+        lstat(path) -> stat result
+        
+        Like stat(path), but do not follow symbolic links.
+		就像stat（path），但不用遵循符号链接。
+		
+    makedirs(name, mode=511)
+        makedirs(path [, mode=0777])
+        
+        Super-mkdir; create a leaf directory and all intermediate ones.
+        Works like mkdir, except that any intermediate path segment (not
+        just the rightmost) will be created if it does not exist.  This is
+        recursive.
+		超级麦克创建叶子目录和所有中间目录。
+        工作类似mkdir，除了任何中间路径段（不是
+        只有最右边的）将创建如果它不存在。这是
+        递归。
+		
+    mkdir(...)
+        mkdir(path [, mode=0777])
+        
+        Create a directory.
+		创建目录。
+		
+    open(...)
+        open(filename, flag [, mode=0777]) -> fd
+        
+        Open a file (for low level IO).
+		打开文件（用于低级IO）。
+		
+    pipe(...)
+        pipe() -> (read_end, write_end)
+        
+        Create a pipe.
+		创建管道。
+		
+    popen(...)
+        popen(command [, mode='r' [, bufsize]]) -> pipe
+        
+        Open a pipe to/from a command returning a file object.
+		打开从/返回返回文件对象的命令的管道。
+		
+    popen2(...)
+    
+    popen3(...)
+    
+    popen4(...)
+    
+    putenv(...)
+	
+        putenv(key, value)
+        
+        Change or add an environment variable.
+		更改或添加环境变量。
+		
+    read(...)
+        read(fd, buffersize) -> string
+        
+        Read a file descriptor.
+		读取文件描述符。
+		
+    remove(...)
+        remove(path)
+        
+        Remove a file (same as unlink(path)).
+        删除文件（与取消链接（路径）相同）。
+		
+    removedirs(name)
+        removedirs(path)
+        
+        Super-rmdir; remove a leaf directory and all empty intermediate
+        ones.  Works like rmdir except that, if the leaf directory is
+        successfully removed, directories corresponding to rightmost path
+        segments will be pruned away until either the whole path is
+        consumed or an error occurs.  Errors during this latter phase are
+        ignored -- they generally mean that a directory was not empty.
+		超级rmdir 删除叶子目录和所有空中间
+        那些。像rmdir一样工作，除了叶子目录是
+        成功删除，对应于最右边路径的目录
+        段将被删除，直到整个路径
+        消耗或发生错误。在后一阶段期间的错误是
+        被忽略 - 它们通常意味着一个目录不为空。
+		
+    rename(...)
+        rename(old, new)
+        
+        Rename a file or directory.
+		重命名文件或目录。
+		
+    renames(old, new)
+        renames(old, new)
+        
+        Super-rename; create directories as necessary and delete any left
+        empty.  Works like rename, except creation of any intermediate
+        directories needed to make the new pathname good is attempted
+        first.  After the rename, directories corresponding to rightmost
+        path segments of the old name will be pruned until either the
+        whole path is consumed or a nonempty directory is found.
+        
+        Note: this function can fail with the new directory structure made
+        if you lack permissions needed to unlink the leaf directory or
+        file.
+		超重命名;根据需要创建目录并删除任何剩余
+        空。像重命名一样工作，除了创建任何中间体
+        尝试使新路径名良好所需的目录
+        第一。重命名后，目录对应的最右边
+        旧名称的路径段将被修剪，直到
+        整个路径消耗或找到非空目录。
+        
+        注意：此功能可能会失败与新的目录结构
+        如果你缺少需要的权限来断开叶子目录或
+        文件。
+    rmdir(...)
+        rmdir(path)
+        
+        Remove a directory.
+		删除目录。
+		
+    spawnl(mode, file, *args)
+        spawnl(mode, file, *args) -> integer
+        
+        Execute file with arguments from args in a subprocess.
+        If mode == P_NOWAIT return the pid of the process.
+        If mode == P_WAIT return the process's exit code if it exits normally;
+        otherwise return -SIG, where SIG is the signal that killed it.
+		在子流程中使用args中的参数执行文件。
+        如果mode == P_NOWAIT返回进程的pid。
+        如果mode == P_WAIT如果它正常退出则返回进程的退出代码;
+        否则返回-SIG，其中SIG是杀死它的信号。
+		
+    spawnle(mode, file, *args)
+        spawnle(mode, file, *args, env) -> integer
+        
+        Execute file with arguments from args in a subprocess with the
+        supplied environment.
+        If mode == P_NOWAIT return the pid of the process.
+        If mode == P_WAIT return the process's exit code if it exits normally;
+        otherwise return -SIG, where SIG is the signal that killed it.
+		在子进程中使用args中的参数执行文件
+        供应环境。
+        如果mode == P_NOWAIT返回进程的pid。
+        如果mode == P_WAIT如果它正常退出则返回进程的退出代码;
+        否则返回-SIG，其中SIG是杀死它的信号。
+    
+    spawnv(...)
+        spawnv(mode, path, args)
+        
+        Execute the program 'path' in a new process.
+        
+            mode: mode of process creation
+            path: path of executable file
+            args: tuple or list of strings
+		在一个新的进程中执行程序'path'。
+        
+            模式：进程创建模式
+            path：可执行文件的路径
+            args：元组或字符串列表
+    
+    spawnve(...)
+        spawnve(mode, path, args, env)
+        
+        Execute the program 'path' in a new process.
+        
+            mode: mode of process creation
+            path: path of executable file
+            args: tuple or list of arguments
+            env: dictionary of strings mapping to strings
+		在一个新的进程中执行程序'path'。
+        
+            模式：进程创建模式
+            path：可执行文件的路径
+            args：元组或参数列表
+            env：字符串映射到字符串的字典
+    
+    startfile(...)
+        startfile(filepath [, operation]) - Start a file with its associated
+        application.
+        启动一个带有关联的文件应用。
+        When "operation" is not specified or "open", this acts like
+        double-clicking the file in Explorer, or giving the file name as an
+        argument to the DOS "start" command: the file is opened with whatever
+        application (if any) its extension is associated.
+        When another "operation" is given, it specifies what should be done with
+        the file.  A typical operation is "print".
+        
+        startfile returns as soon as the associated application is launched.
+        There is no option to wait for the application to close, and no way
+        to retrieve the application's exit status.
+        
+        The filepath is relative to the current directory.  If you want to use
+        an absolute path, make sure the first character is not a slash ("/");
+        the underlying Win32 ShellExecute function doesn't work if it is.
+		当没有指定“操作”或“打开”时，这种行为就像
+        双击资源管理器中的文件，或将文件名作为
+        DOS“start”命令的参数：该文件随任何打开
+        应用程序（如果有）它的扩展是关联的。
+        当给出另一个“操作”时，它指定应该做什么
+        文件。典型的操作是“打印”。
+        
+        启动相关应用程序后，startfile返回。
+        没有选项可以等待应用程序关闭，没有办法
+        以检索应用程序的退出状态。
+        
+        文件路径相对于当前目录。如果要使用
+        绝对路径，确保第一个字符不是斜杠（“/”）;
+        底层的Win32 ShellExecute函数不工作，如果它是。
+    
+    stat(...)
+        stat(path) -> stat result
+        
+        Perform a stat system call on the given path.
+		在给定路径上执行stat系统调用。
+		
+    stat_float_times(...)
+        stat_float_times([newval]) -> oldval
+        
+        Determine whether os.[lf]stat represents time stamps as float objects.
+        If newval is True, future calls to stat() return floats, if it is False,
+        future calls return ints. 
+        If newval is omitted, return the current setting.
+		确定os。[lf] stat是否将时间戳表示为浮点对象。
+        如果newval为True，未来对stat（）的调用将返回浮点数，如果它为False，
+        未来调用返回ints。
+        如果省略newval，则返回当前设置。
+		
+    strerror(...)
+        strerror(code) -> string
+        
+        Translate an error code to a message string.
+		将错误代码转换为消息字符串。
+		
+    system(...)
+        system(command) -> exit_status
+        
+        Execute the command (a string) in a subshell.
+		在子shell中执行命令（字符串）。
+    
+    tempnam(...)
+        tempnam([dir[, prefix]]) -> string
+        
+        Return a unique name for a temporary file.
+        The directory and a prefix may be specified as strings; they may be omitted
+        or None if not needed.
+		返回临时文件的唯一名称。
+        目录和前缀可以指定为字符串;它们可以被省略
+        或如果不需要，则为None。
+    
+    times(...)
+        times() -> (utime, stime, cutime, cstime, elapsed_time)
+        
+        Return a tuple of floating point numbers indicating process times.
+		返回表示处理时间的浮点数的元组。
+    
+    tmpfile(...)
+        tmpfile() -> file object
+        
+        Create a temporary file with no directory entries.
+		创建没有目录条目的临时文件。
+    
+    tmpnam(...)
+        tmpnam() -> string
+        
+        Return a unique name for a temporary file.
+		返回临时文件的唯一名称。
+		
+    umask(...)
+        umask(new_mask) -> old_mask
+        
+        Set the current numeric umask and return the previous umask.
+		设置当前数字umask并返回上一个umask。
+    
+    unlink(...)
+        unlink(path)
+        
+        Remove a file (same as remove(path)).
+		删除文件（与删除（路径）相同）。
+    
+    urandom(...)
+        urandom(n) -> str
+        
+        Return n random bytes suitable for cryptographic use.
+		返回适用于加密使用的n个随机字节。
+    
+    utime(...)
+        utime(path, (atime, mtime))
+        utime(path, None)
+        
+        Set the access and modified time of the file to the given values.  If the
+        second form is used, set the access and modified times to the current time.
+		将文件的访问和修改时间设置为给定值。如果
+        使用第二种形式，将访问和修改的时间设置为当前时间。
+    
+    waitpid(...)
+        waitpid(pid, options) -> (pid, status << 8)
+        
+        Wait for completion of a given process.  options is ignored on Windows.
+		等待给定进程的完成。选项在Windows上被忽略。
+		
+    walk(top, topdown=True, onerror=None, followlinks=False)
+        Directory tree generator.
+        
+        For each directory in the directory tree rooted at top (including top
+        itself, but excluding '.' and '..'), yields a 3-tuple
+        
+            dirpath, dirnames, filenames
+        
+        dirpath is a string, the path to the directory.  dirnames is a list of
+        the names of the subdirectories in dirpath (excluding '.' and '..').
+        filenames is a list of the names of the non-directory files in dirpath.
+        Note that the names in the lists are just names, with no path components.
+        To get a full path (which begins with top) to a file or directory in
+        dirpath, do os.path.join(dirpath, name).
+        
+        If optional arg 'topdown' is true or not specified, the triple for a
+        directory is generated before the triples for any of its subdirectories
+        (directories are generated top down).  If topdown is false, the triple
+        for a directory is generated after the triples for all of its
+        subdirectories (directories are generated bottom up).
+        
+        When topdown is true, the caller can modify the dirnames list in-place
+        (e.g., via del or slice assignment), and walk will only recurse into the
+        subdirectories whose names remain in dirnames; this can be used to prune the
+        search, or to impose a specific order of visiting.  Modifying dirnames when
+        topdown is false is ineffective, since the directories in dirnames have
+        already been generated by the time dirnames itself is generated. No matter
+        the value of topdown, the list of subdirectories is retrieved before the
+        tuples for the directory and its subdirectories are generated.
+        
+        By default errors from the os.listdir() call are ignored.  If
+        optional arg 'onerror' is specified, it should be a function; it
+        will be called with one argument, an os.error instance.  It can
+        report the error to continue with the walk, or raise the exception
+        to abort the walk.  Note that the filename is available as the
+        filename attribute of the exception object.
+        
+        By default, os.walk does not follow symbolic links to subdirectories on
+        systems that support them.  In order to get this functionality, set the
+        optional argument 'followlinks' to true.
+        
+        Caution:  if you pass a relative pathname for top, don't change the
+        current working directory between resumptions of walk.  walk never
+        changes the current directory, and assumes that the client doesn't
+        either.
+        
+        Example:
+        
+        import os
+        from os.path import join, getsize
+        for root, dirs, files in os.walk('python/Lib/email'):
+            print root, "consumes",
+            print sum([getsize(join(root, name)) for name in files]),
+            print "bytes in", len(files), "non-directory files"
+            if 'CVS' in dirs:
+                dirs.remove('CVS')  # don't visit CVS directories
+		目录树生成器。
+        
+        对于根目录在顶部（包括顶部）的目录树中的每个目录
+        本身，但不包括'。和'..'），产生一个3元组
+        
+            dirpath，dirnames，文件名
+        
+        dirpath是一个字符串，即目录的路径。 dirnames是的列表
+        dirpath中的子目录名称（不包括'。'和'..'）。
+        filenames是dirpath中非目录文件的名称列表。
+        注意，列表中的名称只是名称，没有路径组件。
+        要获取完整路径（以top开头）到中的文件或目录
+        dirpath，do os.path.join（dirpath，name）。
+        
+        如果可选的arg'topdown'为true或未指定，则a的三元组
+        目录在其任何子目录的三元组之前生成
+        （目录自上而下生成）。如果topdown是false，三元组
+        为一个目录生成之后的所有的三元组
+        子目录（目录自下而上生成）。
+        
+        当topdown为true时，调用者可以就地修改目录列表
+        （例如，经由del或切片分配），并且步行将仅递归到
+        其名称保留在dirnames中的子目录;这可以用来剪枝
+        搜索，或强加特定的访问顺序。在修改日期时间
+        topdown是false是无效的，因为dirnames中的目录
+        已经生成的dirnames本身生成的时间。不管
+        topdown的值，在之前检索子目录的列表
+        生成目录及其子目录的元组。
+        
+        默认情况下，来自os.listdir（）调用的错误将被忽略。如果
+        可选的arg'onerror'被指定，它应该是一个函数;它
+        将被调用一个参数，一个os.error实例。它可以
+        报告错误以继续执行，或提出异常
+        中止散步。请注意，文件名可作为
+        filename属性的异常对象。
+        
+        默认情况下，os.walk不遵循指向子目录的符号链接
+        支持它们的系统。为了获得这个功能，设置
+        可选参数'followlinks'为true。
+        
+        注意：如果传递相对路径名为top，请不要更改
+        当前工作目录在行走的恢复之间。步行从不
+        更改当前目录，并假定客户端没有
+        或者。
+        
+        例：
+        
+        导入os
+        从os.path导入连接，getsize
+        对于root，dirs，os.walk中的文件（'python / Lib / email'）：
+            打印根，“消耗”，
+            print sum（[getsize（join（root，name））for name in files]），
+            打印“字节”，len（文件），“非目录文件”
+            如果'CVS'在dirs：
+                dirs.remove（'CVS'）＃不访问CVS目录
+    write(...)
+        write(fd, string) -> byteswritten
+        
+        Write a string to a file descriptor.
+		将字符串写入文件描述符。
+DATA
+    F_OK = 0
+    O_APPEND = 8
+    O_BINARY = 32768
+    O_CREAT = 256
+    O_EXCL = 1024
+    O_NOINHERIT = 128
+    O_RANDOM = 16
+    O_RDONLY = 0
+    O_RDWR = 2
+    O_SEQUENTIAL = 32
+    O_SHORT_LIVED = 4096
+    O_TEMPORARY = 64
+    O_TEXT = 16384
+    O_TRUNC = 512
+    O_WRONLY = 1
+    P_DETACH = 4
+    P_NOWAIT = 1
+    P_NOWAITO = 3
+    P_OVERLAY = 2
+    P_WAIT = 0
+    R_OK = 4
+    SEEK_CUR = 1
+    SEEK_END = 2
+    SEEK_SET = 0
+    TMP_MAX = 32767
+    W_OK = 2
+    X_OK = 1
+    __all__ = ['altsep', 'curdir', 'pardir', 'sep', 'extsep', 'pathsep', '...
+    altsep = '/'
+    curdir = '.'
+    defpath = r'.;C:\bin'
+    devnull = 'nul'
+    environ = {'TMP': 'C:\\Users\\hp\\AppData\\Local\\Temp', '...am Files ...
+    extsep = '.'
+    linesep = '\r\n'
+    name = 'nt'
+    pardir = '..'
+    pathsep = ';'
+    sep = r'\'
+
+
