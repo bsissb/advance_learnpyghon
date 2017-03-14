@@ -26,32 +26,52 @@ info = [1, 2, 3, 4, 55, 233]
 
 生成6个线程对象, 每次线程输出一个值，最后输出："the end"。
 '''
-info = [1, 2, 3, 4, 55, 233]
-
-
+ainfo = [1, 2, 3, 4, 55, 233]
 def areturn(x):
-    return x
-
-
-athlist = []
-for i in xrange(6):
-    th = threading.Thread(target=areturn, args=info)
-    athlist.append(th)
-for i in athlist:
-    i.start()
-
-for i in athlist:
-    i.join()
-
+    print x
+sh = []
+for x in ainfo:
+    th = threading.Thread(target=areturn, args=[x])
+    sh.append(th)
+for x in sh:
+    x.start()
+for x in sh:
+    x.join()
+print "end2"
 '''
 习题二：已知列表
 urlinfo = ['http://www.sohu.com', 'http://www.163.com', 'http://www.sina.com']
 用多线程的方式分别打开列表里的URL，并且输出对应的网页标题和内容。
 '''
-urlinfo = ['http://www.sohu.com', 'http://www.163.com', 'http://www.sina.com']
+import urllib
+import re
+urlinfo = ['http://www.baidu.com', 'http://www.163.com', 'http://www.sina.com']
+
+
+def openaurl(url):
+    a = urllib.urlopen(url)
+    webdata = a.read()
+    d = re.search(ur"<title>(\S+)</title>", webdata)
+    if d == None:
+        return None
+    print d.groups()[0]
+
+print openaurl('http://www.sohu.com')
+
+xh = []
+for x in xrange(len(urlinfo)):
+    th = threading.Thread(target=openaurl,args=[urlinfo[x]])
+    xh.append(th)
+
+for x in xh:
+    x.start()
+
+for x in xh:
+    x.join()
 
 '''
 习题三：已知列表
 urlinfo = ['http://www.sohu.com', 'http://www.163.com', 'http://www.sina.com']
 用多线程的方式分别打开列表里的URL，输出网页的http状态码。
 '''
+#http状态码： urllib.getcode()
