@@ -47,16 +47,14 @@ import urllib
 import re
 urlinfo = ['http://www.baidu.com', 'http://www.163.com', 'http://www.sina.com']
 
-
 def openaurl(url):
     a = urllib.urlopen(url)
     webdata = a.read()
     d = re.search(ur"<title>(\S+)</title>", webdata)
     if d == None:
         return None
-    print d.groups()[0]
+    print d.groups()[0]   #不知道为何有些网页找不到title
 
-print openaurl('http://www.sohu.com')
 
 xh = []
 for x in xrange(len(urlinfo)):
